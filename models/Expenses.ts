@@ -15,5 +15,5 @@ export class Expenses extends BaseEntity{
     valor?: number;
 
     @Column()
-    vencimento?: Date;
+    data?: Date;
 }
