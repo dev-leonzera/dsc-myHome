@@ -10,6 +10,9 @@ export class Items extends BaseEntity{
     nome?:string;
 
     @Column()
+    marca?:string;
+
+    @Column()
     quantidade?: number;
 
     @Column()
