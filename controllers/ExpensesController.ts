@@ -2,11 +2,9 @@ import { AbstractController } from "./AbstractController";
 import { Expenses } from "../models/Expenses";
 
 export class ExpensesController extends AbstractController{
-    
-    //variável prefix para receber o path da rota;
+        
     protected prefix: string = '/expenses';
 
-    //métodos para criação das rotas
     list(){
         return async function(req: any, res: any, next: any){
             res.send(await Expenses.find());
@@ -43,7 +41,7 @@ export class ExpensesController extends AbstractController{
                 // Expenses.titulo = req.body.titulo;
                 // Expenses.valor = req.body.valor;
                 expenses.data = req.body.data
-                expenses.save()
+                await expenses.save()
                 res.send(expenses)
             }
             else{
@@ -57,13 +55,12 @@ export class ExpensesController extends AbstractController{
             let expenses: Expenses | undefined = await Expenses.findOne({id: req.params.id})
 
             if(expenses){
-                expenses.remove()
+                await expenses.remove()
                 res.status(204).send("Expenses deleted")
             }
         }
     }
 
-    //instanciando a criação das rotas;
     routes(){
         this.forRouter('/').get(this.list());
         this.forRouter('/').post(this.create());

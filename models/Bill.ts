@@ -9,9 +9,10 @@ export class Bill extends BaseEntity{
     @Column()
     titulo?: string;
 
-    @Column({
-        type: "money"
-    })
+    @Column()
+    tipo?: string;
+
+    @Column("double precision")
     valor?: number;
 
     @Column()

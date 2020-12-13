@@ -3,10 +3,8 @@ import { Bill } from "../models/Bill";
 
 export class BillController extends AbstractController{
     
-    //variável prefix para receber o path da rota;
     protected prefix: string = '/bill';
 
-    //métodos para criação das rotas
     list(){
         return async function(req: any, res: any, next: any){
             res.send(await Bill.find());
@@ -29,10 +27,11 @@ export class BillController extends AbstractController{
         return async function(req: any, res: any, next: any){
             let bill: Bill = new Bill()
             bill.titulo = req.body.titulo;
+            bill.tipo = req.body.tipo;
             bill.valor = req.body.valor;
             bill.vencimento = req.body.vencimento
             await bill.save()
-            res.status(201).send( bill )
+            res.status(201).send(bill)
         }
     }
 
@@ -40,11 +39,9 @@ export class BillController extends AbstractController{
         return async function(req: any, res: any, next: any){
             let bill: Bill | undefined = await Bill.findOne({id: req.params.id})
             if(bill){
-                // bill.titulo = req.body.titulo;
-                // bill.valor = req.body.valor;
                 bill.vencimento = req.body.vencimento
+                await bill.save()
                 res.send(bill)
-                bill.save()
             }
             else{
                 res.status(404).send("Bill not found")
@@ -55,17 +52,13 @@ export class BillController extends AbstractController{
     delete(){
         return async function(req: any, res: any, next: any){
             let bill: Bill | undefined = await Bill.findOne({id: req.params.id})
-
             if(bill){
-                bill.remove()
+               await bill.remove()
                 res.status(204).send("Bill deleted")
             }
         }
     }
 
-
-
-    //instanciando a criação das rotas;
     routes(){
         this.forRouter('/').get(this.list());
         this.forRouter('/').post(this.create());
@@ -73,5 +66,4 @@ export class BillController extends AbstractController{
         this.forRouter('/:id').put(this.alter());
         this.forRouter('/:id').delete(this.delete());
     }
-
 }
