@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "ts-node ./bin/www",
-    "dev": "nodemon"
+    "dev": "nodemon",
+    "typeorm": "ts-node ./node_modules/typeorm/cli.js"
   },
   "dependencies": {
     "@types/express": "^4.17.9",

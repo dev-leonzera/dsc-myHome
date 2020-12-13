@@ -9,9 +9,7 @@ export class Expenses extends BaseEntity{
     @Column()
     titulo?: string;
 
-    @Column({
-        type: "money"
-    })
+    @Column("double precision")
     valor?: number;
 
     @Column()
