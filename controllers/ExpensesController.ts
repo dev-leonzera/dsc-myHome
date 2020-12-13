@@ -43,7 +43,7 @@ export class ExpensesController extends AbstractController{
                 // Expenses.titulo = req.body.titulo;
                 // Expenses.valor = req.body.valor;
                 expenses.data = req.body.data
-                expenses.save()
+                await expenses.save()
                 res.send(expenses)
             }
             else{
@@ -57,7 +57,7 @@ export class ExpensesController extends AbstractController{
             let expenses: Expenses | undefined = await Expenses.findOne({id: req.params.id})
 
             if(expenses){
-                expenses.remove()
+                await expenses.remove()
                 res.status(204).send("Expenses deleted")
             }
         }
