@@ -3,10 +3,8 @@ import { Bill } from "../models/Bill";
 
 export class BillController extends AbstractController{
     
-    //variável prefix para receber o path da rota;
     protected prefix: string = '/bill';
 
-    //métodos para criação das rotas
     list(){
         return async function(req: any, res: any, next: any){
             res.send(await Bill.find());
@@ -61,7 +59,6 @@ export class BillController extends AbstractController{
         }
     }
 
-    //instanciando a criação das rotas;
     routes(){
         this.forRouter('/').get(this.list());
         this.forRouter('/').post(this.create());
