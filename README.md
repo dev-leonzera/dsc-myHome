@@ -25,3 +25,16 @@ Nele é possível administrar coisas como:
 - TypeORM, utilizando o pattern Active Record
 
 - Inversify, aplicando a inversão de controle e a injeção de dependência
+
+
+## Como rodar
+
+- Após o clone:
+
+- cd dsc-myHome
+
+- npm i (Para instalar as dependências)
+
+- npm run dev (Para rodar o sistema)
+
+- npm run typeorm:cli -- migration:run (Para rodar as migrations)
